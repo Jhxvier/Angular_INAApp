@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { MATERIAL_IMPORTS } from '../../shared/material-imports';
-import { Footer } from '../../layout/footer/footer';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  imports: [...MATERIAL_IMPORTS, Footer, RouterOutlet, RouterLink],
-  templateUrl: './home.html',
-  styleUrl: './home.scss',
+  selector: 'app-header',
+  imports: [...MATERIAL_IMPORTS],
+  templateUrl: './header.html',
+  styleUrl: './header.scss',
 })
-export class Home {
+export class Header {
   opened = true;
 
   menuItems = [

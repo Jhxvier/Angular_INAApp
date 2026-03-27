@@ -1,9 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { Home } from './pages/home/home';
+import { M } from '@angular/cdk/keycodes';
+import { MATERIAL_IMPORTS } from './shared/material-imports';
 
 @Component({
   selector: 'app-root',
-  imports: [Home],
+  imports: [Home, ...MATERIAL_IMPORTS],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
