@@ -3,6 +3,9 @@ import { MATERIAL_IMPORTS } from '../../../shared/material-imports';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../service/authService';
+import { LoginModel } from '../../../models/loginModel';
+import { error } from 'node:console';
 
 @Component({
   selector: 'app-login',
@@ -10,36 +13,26 @@ import { CommonModule } from '@angular/common';
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
-
-// Se exporta la clase Login para poder usarla en otros archivos
 export class Login {
-  // Se inyecta FormBuilder usando la función inject (Angular moderno)
-  // FormBuilder sirve para crear formularios reactivos de manera más sencilla
   private fb = inject(FormBuilder);
+  //inyecicon de dependencias, para acceder al objeto de servicio de autenticacion
+  private authService = inject(AuthService);
 
-  // Se define el formulario reactivo llamado loginForm
-  // fb.group crea un grupo de controles (formulario)
   loginForm = this.fb.group({
-    // Campo "email"
-    // Valor inicial: '' (vacío)
-    // Validaciones:
-    // - required: obligatorio
-    // - email: formato de correo válido
     username: ['', [Validators.required, Validators.email]],
-
-    // Campo "password"
-    // Valor inicial: '' (vacío)
-    // Validaciones:
-    // - required: obligatorio
-    // - minLength(6): mínimo 6 caracteres
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
   login(): void {
     if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
-      console.log(username);
-      console.log(password);
+      this.authService.login(this.loginForm.value as LoginModel).subscribe({
+        next: (resp) => {
+          this.authService.saveSession(resp);
+        },
+        error: (error) => {
+          console.log('Error', error);
+        },
+      });
     }
   }
 }

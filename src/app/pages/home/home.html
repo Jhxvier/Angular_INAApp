@@ -10,7 +10,7 @@
 
     <mat-divider></mat-divider>
 
-    <mat-nav-list>
+    <mat-nav-list *ngIf="isLoggedIn">
       @for (item of menuItems; track item.label) {
         <a mat-list-item [routerLink]="item.route" routerLinkActive="active-link" class="menu-link">
           <mat-icon matListItemIcon class="icono">{{ item.icon }}</mat-icon>
@@ -42,9 +42,11 @@
     <div class="page-content">
       <div class="welcome-card">
         <h1>Bienvenido</h1>
+
         <router-outlet></router-outlet>
       </div>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
 <app-footer></app-footer>

@@ -1,16 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { MATERIAL_IMPORTS } from '../../shared/material-imports';
 import { Footer } from '../../layout/footer/footer';
-import { RouterLink, RouterOutlet } from '@angular/router';
-
+import { AuthService } from '../../service/authService';
 @Component({
   selector: 'app-home',
-  imports: [...MATERIAL_IMPORTS, Footer, RouterOutlet, RouterLink],
+  imports: [...MATERIAL_IMPORTS, Footer, RouterLink, RouterOutlet],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
 export class Home {
-  opened = true;
+  private authService = inject(AuthService);
+
+  isLoggedIn = this.authService.isLoggedIn;
+
+  titulo: string = 'Bienvenidos INA APP! xxxxx';
+
+  opened: boolean = true;
 
   menuItems = [
     { icon: 'home', label: 'Inicio', route: '/inicio' },

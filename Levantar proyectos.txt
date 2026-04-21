@@ -1,0 +1,20 @@
+Levantar frontend(angular) y backend(miappserver)
+
+Opción A: Terminales separadas (recomendado)
+
+Abre una terminal en VS Code (Terminal > New Terminal).
+
+En la primera terminal (ya en la raíz), ejecuta el frontend: ng serve
+
+Esto iniciará Angular en http://localhost:4200.
+
+Abre una segunda terminal (Terminal > New Terminal).
+
+En la segunda terminal, ejecuta el backend: cd miappserver && npm run dev
+
+Esto iniciará el servidor Node.js en http://localhost:3000.
+
+Ahora tendrás:
+
+Frontend: http://localhost:4200
+Backend: http://localhost:3000
