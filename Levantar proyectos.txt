@@ -1,3 +1,10 @@
+Para levantar un proyecto en angular:
+
+npm i
+npm start
+ng serve
+npm run dev (backend - API)
+
 Levantar frontend(angular) y backend(miappserver)
 
 Opción A: Terminales separadas (recomendado)
