@@ -11,13 +11,13 @@ Opción A: Terminales separadas (recomendado)
 
 Abre una terminal en VS Code (Terminal > New Terminal).
 
-En la primera terminal (ya en la raíz), ejecuta el frontend: ng serve
+En la primera terminal (ya en la raíz), ejecuta el frontend (InaApp): ng serve
 
 Esto iniciará Angular en http://localhost:4200.
 
 Abre una segunda terminal (Terminal > New Terminal).
 
-En la segunda terminal, ejecuta el backend: cd miappserver && npm run dev
+En la segunda terminal, ejecuta el backend (miappserver): cd miappserver && npm run dev
 
 Esto iniciará el servidor Node.js en http://localhost:3000.
 

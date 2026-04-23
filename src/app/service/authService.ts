@@ -1,6 +1,4 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { PLATFORM_ID } from '@angular/core';
 import { LoginModel, LoginResponse } from '../models/loginModel';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -9,11 +7,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class AuthService {
-  private platformId = inject(PLATFORM_ID);
-
   //signal
   private tokenSignal = signal<string | null>(
-    isPlatformBrowser(this.platformId) ? localStorage.getItem('token') : null,
+    typeof window !== 'undefined' ? localStorage.getItem('token') : null,
   );
 
   isLoggedIn = computed(() => !!this.tokenSignal());
