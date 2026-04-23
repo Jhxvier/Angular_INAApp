@@ -7,7 +7,11 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:inaApp": "node dist/inaApp/server/server.mjs"
+    "serve:ssr:inaApp": "node dist/inaApp/server/server.mjs",
+    "dev:web": "ng serve",
+    "dev:api": "npm --prefix MiAppServer run dev",
+    "dev:all": "node -e \"const {spawn}=require('child_process');const c=(cmd,args)=>spawn(cmd,args,{stdio:'inherit',shell:true});const a=c('npm',['run','dev:api']);const b=c('npm',['run','dev:web']);const end=(code=0)=>{a.kill('SIGTERM');b.kill('SIGTERM');process.exit(code)};a.on('exit',code=>code&&end(code));b.on('exit',code=>code&&end(code));process.on('SIGINT',()=>end(0));process.on('SIGTERM',()=>end(0));\"",
+    "dev": "npm run dev:all"
   },
   "private": true,
   "packageManager": "npm@11.11.0",
