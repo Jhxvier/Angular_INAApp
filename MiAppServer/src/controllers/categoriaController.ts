@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
-import { AppDataSource } from "../data-source";
-import { Categoria } from "../entities/Categoria";
-import { CategoriaMapper } from "../mappers/categoriasMappers";
+import { Request, Response } from 'express';
+import { AppDataSource } from '../data-source';
+import { Categoria } from '../entities/Categoria';
+import { CategoriaMapper } from '../mappers/categoriasMappers';
 
 class categoriaController {
   // Obtener todas las categorías
@@ -15,17 +15,13 @@ class categoriaController {
 
       // Si no hay categorías, devolver un 404
       if (listaCategorias.length === 0) {
-        return res
-          .status(404)
-          .json({ message: "No hay categorías registradas" });
+        return res.status(404).json({ message: 'No hay categorías registradas' });
       }
 
       // Devolver la lista de categorías con un 200
-      return res
-        .status(200)
-        .json(CategoriaMapper.toCategoriaResponseDtoList(listaCategorias));
+      return res.status(200).json(CategoriaMapper.toCategoriaResponseDtoList(listaCategorias));
     } catch (error) {
-      return res.status(500).json({ message: "Error del servidor", error });
+      return res.status(500).json({ message: 'Error del servidor', error });
     }
   };
 
@@ -39,13 +35,11 @@ class categoriaController {
       const categoria = await repo.findOneBy({ id: Number(id), estado: true });
 
       if (!categoria) {
-        return res.status(404).json({ message: "Categoría no encontrada" });
+        return res.status(404).json({ message: 'Categoría no encontrada' });
       }
-      return res
-        .status(200)
-        .json(CategoriaMapper.toCategoriaResponseDto(categoria));
+      return res.status(200).json(CategoriaMapper.toCategoriaResponseDto(categoria));
     } catch (error) {
-      return res.status(500).json({ message: "Error del servidor", error });
+      return res.status(500).json({ message: 'Error del servidor', error });
     }
   };
 
@@ -67,9 +61,7 @@ class categoriaController {
       });
 
       if (categoriaExistente) {
-        return res
-          .status(400)
-          .json({ message: "Ya existe una categoría con ese nombre" });
+        return res.status(400).json({ message: 'Ya existe una categoría con ese nombre' });
       }
 
       //crear una nueva categoria
@@ -81,13 +73,9 @@ class categoriaController {
 
       //guardar la nueva categoria en la base de datos
       await repo.save(nuevaCategoria);
-      return res
-        .status(201)
-        .json({ message: "Categoría creada exitosamente", nuevaCategoria });
+      return res.status(201).json({ message: 'Categoría creada exitosamente', nuevaCategoria });
     } catch (error) {
-      return res
-        .status(500)
-        .json({ message: "Error al crear categoria", error });
+      return res.status(500).json({ message: 'Error al crear categoria', error });
     }
   };
 
@@ -103,7 +91,7 @@ class categoriaController {
       const categoria = await repo.findOneBy({ id: Number(id) });
 
       if (!categoria) {
-        return res.status(404).json({ message: "Categoría no encontrada" });
+        return res.status(404).json({ message: 'Categoría no encontrada' });
       }
 
       //Reglas de negocio
@@ -112,9 +100,7 @@ class categoriaController {
         estado: true,
       });
       if (categoriaExistente) {
-        return res
-          .status(400)
-          .json({ message: "Ya existe una categoría con ese nombre" });
+        return res.status(400).json({ message: 'Ya existe una categoría con ese nombre' });
       }
 
       //actualizar la categoria
@@ -123,11 +109,9 @@ class categoriaController {
 
       //guardar los cambios
       await repo.save(categoria);
-      return res
-        .status(200)
-        .json(CategoriaMapper.toCategoriaResponseDto(categoria));
+      return res.status(200).json(CategoriaMapper.toCategoriaResponseDto(categoria));
     } catch (error) {
-      return res.status(500).json({ message: "Error del servidor", error });
+      return res.status(500).json({ message: 'Error del servidor', error });
     }
   };
 
@@ -142,17 +126,15 @@ class categoriaController {
 
       //validar si la categoria existe
       if (!categoria) {
-        return res.status(404).json({ message: "Categoría no encontrada" });
+        return res.status(404).json({ message: 'Categoría no encontrada' });
       }
 
       //eliminar la categoria (cambio de estado)
       categoria.estado = false;
       await repo.save(categoria);
-      return res
-        .status(200)
-        .json({ message: "Categoría eliminada exitosamente", categoria });
+      return res.status(200).json({ message: 'Categoría eliminada exitosamente', categoria });
     } catch (error) {
-      return res.status(500).json({ message: "Error del servidor", error });
+      return res.status(500).json({ message: 'Error del servidor', error });
     }
   };
 }
