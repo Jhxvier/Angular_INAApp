@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { AppDataSource } from '../data-source';
 import { Categoria } from '../entities/Categoria';
 import { CategoriaMapper } from '../mappers/categoriasMappers';
+import { Not } from 'typeorm/find-options/operator/Not';
 
 class categoriaController {
   // Obtener todas las categorías
@@ -95,10 +96,14 @@ class categoriaController {
       }
 
       //Reglas de negocio
-      const categoriaExistente = await repo.findOneBy({
-        nombre: nombre,
-        estado: true,
+      const categoriaExistente = await repo.findOne({
+        where: {
+          nombre: nombre,
+          estado: true,
+          id: Not(Number(id)), // ← Excluye el ID actual
+        },
       });
+
       if (categoriaExistente) {
         return res.status(400).json({ message: 'Ya existe una categoría con ese nombre' });
       }

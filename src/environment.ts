@@ -4,5 +4,6 @@ export const environment = {
   endpoints: {
     categorias: 'api/categorias',
     productos: 'api/productos',
+    usuarios: 'api/usuarios',
   },
 };

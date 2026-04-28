@@ -21,6 +21,11 @@ export const routes: Routes = [
       import('./pages/categorias/lista-categoria/lista-categoria').then((m) => m.ListaCategoria),
   },
   {
+    path: 'listaUsuarios',
+    loadComponent: () =>
+      import('./pages/usuarios/lista-usuario/lista-usuario').then((m) => m.ListaUsuario),
+  },
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',

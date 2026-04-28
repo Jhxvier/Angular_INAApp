@@ -24,6 +24,7 @@ export class Home {
   menuItems = [
     { icon: 'home', label: 'Incio', route: '/dashboard' },
     { icon: 'category', label: 'Categoria', route: '/listaCategorias' },
+    { icon: 'people', label: 'Usuarios', route: '/listaUsuarios' },
   ];
 
   toggleMenu(): void {
